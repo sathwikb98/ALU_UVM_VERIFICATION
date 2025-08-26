@@ -31,11 +31,7 @@ class coverage extends uvm_component;
   endgroup
 
   covergroup out_cg;
-    c1: coverpoint p_pktm.RES; //{
-      //bins a1 = {0}; // least value
-      //bins a2 = {511}; // 9 bit max value
-      //bins a3 = default;
-    //}
+    c1: coverpoint p_pktm.RES; 
     c2: coverpoint {p_pktm.G,p_pktm.E,p_pktm.L}{
       bins a1 = {[1:$]};
     }
