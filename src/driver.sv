@@ -3,7 +3,7 @@ class driver extends uvm_driver#(sequence_item);
   // virtual interface !!
   virtual inf vif;
 
-  uvm_analysis_port#(sequence_item) item_collect_drv;
+  //uvm_analysis_port#(sequence_item) item_collect_drv;
 
   sequence_item req;
 
@@ -34,7 +34,7 @@ class driver extends uvm_driver#(sequence_item);
     vif.OPA       <= req.OPA;
     vif.OPB       <= req.OPB;
     vif.CIN       <= req.CIN;
-    item_collect_drv.write(req);
+    //item_collect_drv.write(req);
   endtask
 
   task run_phase(uvm_phase phase);
