@@ -10,7 +10,10 @@ class test extends uvm_test;
 
   function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-    env_o = env::type_id::create("env",this);
+    // setting agent configuration before creating it
+    uvm_config_db#(uvm_active_passive_enum)::set(this,"env_o.agent_active","is_active",UVM_ACTIVE);
+    uvm_config_db#(uvm_active_passive_enum)::set(this,"env_o.agent_passive","is_active",UVM_PASSIVE);
+    env_o = env::type_id::create("env_o",this);
     b_seq = _sequence::type_id::create("b_seq");
 
   endfunction
@@ -18,7 +21,7 @@ class test extends uvm_test;
   task run_phase(uvm_phase phase);
     uvm_objection phase_done = phase.get_objection();
     phase.raise_objection(this);
-      b_seq.start(env_o.agt.seqr);
+      b_seq.start(env_o.agt_a.seqr);
     phase.drop_objection(this);
     // drain time for last sequence to run !!
     phase_done.set_drain_time(this,20);
@@ -41,7 +44,7 @@ class arthematic_test_s extends test;
   task run_phase(uvm_phase phase);
     uvm_objection phase_done = phase.get_objection();
     phase.raise_objection(this);
-      seq2.start(env_o.agt.seqr);
+      seq2.start(env_o.agt_a.seqr);
     phase.drop_objection(this);
     // drain time for last sequence to run !!
     phase_done.set_drain_time(this,20);
@@ -62,7 +65,7 @@ class arthematic_test_d extends test;
   task run_phase(uvm_phase phase);
     uvm_objection phase_done = phase.get_objection();
     phase.raise_objection(this);
-      seq3.start(env_o.agt.seqr);
+      seq3.start(env_o.agt_a.seqr);
     phase.drop_objection(this);
     // drain time for last sequence to run !!
     phase_done.set_drain_time(this,20);
@@ -83,7 +86,7 @@ class logical_test_s extends test;
   task run_phase(uvm_phase phase);
     uvm_objection phase_done = phase.get_objection();
     phase.raise_objection(this);
-      seq4.start(env_o.agt.seqr);
+      seq4.start(env_o.agt_a.seqr);
     phase.drop_objection(this);
     // drain time for last sequence to run !!
     phase_done.set_drain_time(this,20);
@@ -104,7 +107,7 @@ class logical_test_d extends test;
   task run_phase(uvm_phase phase);
     uvm_objection phase_done = phase.get_objection();
     phase.raise_objection(this);
-      seq5.start(env_o.agt.seqr);
+      seq5.start(env_o.agt_a.seqr);
     phase.drop_objection(this);
     // drain time for last sequence to run !!
     phase_done.set_drain_time(this,20);
@@ -124,7 +127,7 @@ class regression_test extends test;
   task run_phase(uvm_phase phase);
     uvm_objection phase_done = phase.get_objection();
     phase.raise_objection(this);
-      reg_seq.start(env_o.agt.seqr);
+      reg_seq.start(env_o.agt_a.seqr);
     phase.drop_objection(this);
     // drain time for last sequence to run !!
     phase_done.set_drain_time(this,20);
