@@ -19,7 +19,7 @@ class driver extends uvm_driver#(sequence_item);
 
     if(!uvm_config_db#(virtual inf)::get(this,"","vif",vif) )
       `uvm_fatal(get_type_name(), " Could'nt get the handle to VIF !");
-    item_collect_drv = new("item_collect_drv",this);
+    // item_collect_drv = new("item_collect_drv",this);
   endfunction
 
   function bit SINGLE_OP_CMD(bit MODE , bit [`CMD_WIDTH-1:0] CMD);
